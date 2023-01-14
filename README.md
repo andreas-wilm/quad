@@ -10,8 +10,8 @@ CSV file should contain base quality values as int in the form: `from,to`
 
 Requirement: nim compiler and htsnim installed
 
-nim c -d:nimDebugDlOpen  quad.nim 
+`nim c -d:nimDebugDlOpen  quad.nim`
 
 #  Example execution
 
-`./quad -q qmap_even2.csv -b Col0_C1.100k.bam`
+`./quad -q example/qmap_even2.csv -b example/Col0_C1.100k.bam`
