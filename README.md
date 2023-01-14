@@ -14,4 +14,4 @@ nim c -d:nimDebugDlOpen  quad.nim
 
 #  Example execution
 
-./quad -q qmap_even2.csv -b Col0_C1.100k.bam
+`./quad -q qmap_even2.csv -b Col0_C1.100k.bam`
