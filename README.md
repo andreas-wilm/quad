@@ -29,3 +29,8 @@ compiled binary (Linux only), which was build with [Brent Pedersens
 #  Example execution
 
 `./quad -q example/qmap_even2.csv -b example/Col0_C1.100k.bam`
+
+
+# License
+
+See LICENSE file

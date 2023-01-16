@@ -1,6 +1,6 @@
 # Andreas Wilm <andreas.wilm@gmail.com>
 # Copyright 2023
-# License: WTFPL
+# License: MIT
 
 
 # Reads a BAM file maps base qualities as defined in a base quality
