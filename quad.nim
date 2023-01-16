@@ -41,6 +41,8 @@ proc parse_qmap_file(qmap_file: string): Table[int, int] =
     
   for row in csv[Q2Q](qmap_file, skip_header=true):
     #echo fmt"{row.key} -> {row.value}"
+    for v in [row.key, row.value]:
+      doAssert(v>=0 and v<=93, fmt"Invalid quality {v} found in {qmap_file}")
     qmap[row.key] = row.value
   return qmap
 
