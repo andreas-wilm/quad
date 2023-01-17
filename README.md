@@ -1,5 +1,5 @@
 Reads a BAM file maps base qualities as defined in a base quality
-mapping file (CSV) and writes SAM
+mapping file (CSV)
 
 
 # Input
@@ -28,7 +28,10 @@ compiled binary (Linux only), which was build with [Brent Pedersens
 
 #  Example execution
 
-`./quad -q example/qmap_even2.csv -b example/Col0_C1.100k.bam`
+`./quad -q example/qmap_even2.csv -i example/Col0_C1.100k.bam -o out.bam`
+
+
+By default SAM is written. The output format can be changed to BAM with `--out-fmt b`
 
 
 # License
