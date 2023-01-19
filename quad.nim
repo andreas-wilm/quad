@@ -35,10 +35,10 @@ proc parse_qmap_file(qmap_file: string): Table[uint8, uint8] =
     key: int
     value: int
 
-  for i in countup(0, int(high(uint8))):# nim requires the int cast, but why?
+  for i in countup(0, int(high(uint8))): # nim requires the int cast, but why?
     qmap[uint8(i)] = uint8(i)
 
-    
+
   for row in csv[Q2Q](qmap_file, skip_header = true):
     for v in [row.key, row.value]:
       doAssert(v >= 0 and v <= max_val, fmt"Invalid quality {v} found in {qmap_file}")
@@ -46,7 +46,8 @@ proc parse_qmap_file(qmap_file: string): Table[uint8, uint8] =
   return qmap
 
 
-proc main(qmap_file: string, in_bam: string, out_bam: string, out_fmt = "", threads = 1): int =
+proc main(qmap_file: string, in_bam: string, out_bam: string, out_fmt = "",
+    threads = 1): int =
   var
     ibam: Bam
     obam: Bam
@@ -64,15 +65,15 @@ proc main(qmap_file: string, in_bam: string, out_bam: string, out_fmt = "", thre
     # we can't modify rec's bq in place...
     var new_aln = NewRecord(ibam.hdr)
     var basequals_in: seq[uint8]
-    
+
     discard aln.base_qualities(basequals_in)
     let basequals_out_ascii = map_bqs_and_enc(basequals_in, qmap)
-    
+
     var alnfields = aln.tostring.split("\t")
     aln_fields[10] = basequals_out_ascii
     new_aln.from_string(aln_fields.join("\t"))
     obam.write(new_aln)
-    
+
   obam.close()
   return 0
 

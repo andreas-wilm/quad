@@ -20,8 +20,10 @@ Note: `libhts.so` needs to be found in your `LD_LIBRARY_PATH`.
 
 # Binaries
 
-To avoid the hassle of installation use the provided statically
-compiled binary (Linux only), which was build with [Brent Pedersens
+To avoid the hassle of compilation altogether, use the statically
+compiled binary (Linux only), provided in the release packages.
+
+Binaries were built with [Brent Pedersen's
 `hts_nim_static_builder`](https://github.com/brentp/hts-nim#static-builds):
 
 `hts_nim_static_builder -s quad --deps "hts@>=0.3.23" --deps "cligen@>=1.4.1" --deps "csvtools@>=0.2.1"`
@@ -31,9 +33,10 @@ compiled binary (Linux only), which was build with [Brent Pedersens
 `./quad -q example/qmap_even2.csv -i example/Col0_C1.100k.bam -o out.bam`
 
 
-By default SAM is written. The output format can be changed to BAM with `--out-fmt b`
+When stdout (-) is used the format changes automatically to SAM.
+The output format can be changed with `--out-fmt`
 
 
 # License
 
-See LICENSE file
+MIT License. See LICENSE file
