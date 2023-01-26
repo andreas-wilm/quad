@@ -1,10 +1,11 @@
-Reads a BAM file maps base qualities as defined in a base quality
+Maps base qualities in a BAM file as defined in a base quality
 mapping file (CSV)
 
 
 # Input
 
-CSV file should contain base quality values as int in the form: `from,to`
+1. A BAM file
+1. A CSV file should contain base quality values as int in the form: `from,to`
 
 # Compilation
 
@@ -33,7 +34,7 @@ Binaries were built with [Brent Pedersen's
 `./quad -q example/qmap_even2.csv -i example/Col0_C1.100k.bam -o out.bam`
 
 
-When stdout (-) is used the format changes automatically to SAM.
+When stdout (-) is used for output the format changes automatically to SAM.
 The output format can be changed with `--out-fmt`
 
 

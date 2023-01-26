@@ -15,15 +15,6 @@ import csvtools
 import hts
 
 
-proc map_bqs_and_enc(bqs: seq[uint8], qmap: Table[uint8, uint8]): string =
-  # assumes that all values in qmap are set from 0 to high(uint8)!
-  var mapped_phred: seq[char]
-  for q in bqs:
-    let n = chr(qmap[q] + 33)
-    mapped_phred.add(n)
-  return mapped_phred.join()
-
-
 proc parse_qmap_file(qmap_file: string): Table[uint8, uint8] =
   # parse the quality mapping csv file and turn into a table.
   # file is expected to have a header.
@@ -62,17 +53,11 @@ proc main(qmap_file: string, in_bam: string, out_bam: string, out_fmt = "",
   obam.write_header(ibam.hdr)
 
   for aln in ibam:
-    # we can't modify rec's bq in place...
-    var new_aln = NewRecord(ibam.hdr)
-    var basequals_in: seq[uint8]
+    var bqs = bam_get_qual(aln.b)
+    for i in 0..<aln.b.core.l_qseq:
+      bqs[i] = qmap[bqs[i]]
 
-    discard aln.base_qualities(basequals_in)
-    let basequals_out_ascii = map_bqs_and_enc(basequals_in, qmap)
-
-    var alnfields = aln.tostring.split("\t")
-    aln_fields[10] = basequals_out_ascii
-    new_aln.from_string(aln_fields.join("\t"))
-    obam.write(new_aln)
+    obam.write(aln)
 
   obam.close()
   return 0
